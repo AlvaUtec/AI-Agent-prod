@@ -5,12 +5,8 @@
   "scripts": {
     "start": "npx tsx index.ts"
   },
-  "overrides": {
-    "whatwg-url": "13.0.0"
-  },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/node": "^22.10.5"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -19,7 +15,7 @@
     "dotenv": "^16.4.5",
     "got": "^14.4.4",
     "lowdb": "^7.0.1",
-    "openai": "^4.78.1",
+    "openai": "^4.70.3",
     "ora": "^8.1.1",
     "terminal-image": "^3.0.0",
     "tsx": "^4.19.2",

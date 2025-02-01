@@ -1,26 +1,19 @@
-import { z } from 'zod'
 import type { ToolFn } from '../../types'
+import { z } from 'zod'
 import fetch from 'node-fetch'
 
 export const redditToolDefinition = {
   name: 'reddit',
-  parameters: z
-    .object({})
-    .describe(
-      'Use this tool to get the latest posts from Reddit. It will return a JSON object with the title, link, subreddit, author, and upvotes of each post.'
-    ),
+  parameters: z.object({}),
+  description: 'get the latest posts from Reddit',
 }
 
 type Args = z.infer<typeof redditToolDefinition.parameters>
 
-export const reddit: ToolFn<Args, string> = async ({
-  toolArgs,
-  userMessage,
-}) => {
-  const { data } = await fetch('https://www.reddit.com/r/aww/.json').then((res) =>
-    res.json()
+export const reddit: ToolFn<Args, string> = async ({ toolArgs }) => {
+  const { data } = await fetch('https://www.reddit.com/r/nba/.json').then(
+    (res) => res.json()
   )
-
   const relevantInfo = data.children.map((child: any) => ({
     title: child.data.title,
     link: child.data.url,

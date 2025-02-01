@@ -9,7 +9,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
-
+results.json
 # Caches 
 
 .cache
@@ -175,4 +175,4 @@ dist
 .DS_Store
 .env
 
-db.json 
+db.json

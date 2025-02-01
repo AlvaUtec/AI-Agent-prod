@@ -36,6 +36,7 @@ export const getDb = async () => {
 export const addMessages = async (messages: AIMessage[]) => {
   const db = await getDb()
   db.data.messages.push(...messages.map(addMetadata))
+
   await db.write()
 }
 
@@ -45,14 +46,14 @@ export const getMessages = async () => {
 }
 
 export const saveToolResponse = async (
-  toolCallId:  string,
+  toolCallId: string,
   toolResponse: string
 ) => {
   return addMessages([
     {
       role: 'tool',
       content: toolResponse,
-      tool_call_id: toolCallId
-    }
+      tool_call_id: toolCallId,
+    },
   ])
 }

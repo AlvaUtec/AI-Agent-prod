@@ -1,14 +1,16 @@
-import { runEval } from '../evalTools'
 import { runLLM } from '../../src/llm'
-import { ToolCallMatch } from '../scorers'
 import { redditToolDefinition } from '../../src/tools/reddit'
+import { runEval } from '../evalTools'
+import { ToolCallMatch } from '../scorers'
 
 const createToolCallMessage = (toolName: string) => ({
   role: 'assistant',
   tool_calls: [
     {
       type: 'function',
-      function: { name: toolName },
+      function: {
+        name: toolName,
+      },
     },
   ],
 })
@@ -21,7 +23,11 @@ runEval('reddit', {
     }),
   data: [
     {
-      input: 'tell me something cool from reddit',
+      input: 'find me something interesting on reddit',
+      expected: createToolCallMessage(redditToolDefinition.name),
+    },
+    {
+      input: 'hi',
       expected: createToolCallMessage(redditToolDefinition.name),
     },
   ],

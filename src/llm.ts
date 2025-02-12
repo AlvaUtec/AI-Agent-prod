@@ -3,7 +3,6 @@ import { openai } from './ai'
 import { zodFunction, zodResponseFormat } from 'openai/helpers/zod'
 import { systemPrompt as defaultSystemPrompt } from './systemPrompt'
 import { z } from 'zod'
-
 export const runLLM = async ({
   messages,
   tools = [],
@@ -45,15 +44,14 @@ export const runApprovalCheck = async (userMessage: string) => {
       z.object({
         approved: z
           .boolean()
-          .describe('did the user say they approved or not'),
+          .describe('did the user approve the action or not'),
       }),
-      'approval check'
+      'approval'
     ),
     messages: [
       {
         role: 'system',
-        content:
-          'Determine if the user approved the image generation. If you are not sure, then it is not approved.',
+        content: `Determine if the user approved the image generation. If you are not sure, then it is not approved.`,
       },
       { role: 'user', content: userMessage },
     ],

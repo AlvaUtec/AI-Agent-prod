@@ -1,6 +1,7 @@
 import { JSONFilePreset } from 'lowdb/node'
 import type { AIMessage } from '../types'
 import { v4 as uuidv4 } from 'uuid'
+import { summarizeMessages } from './llm'
 
 export type MessageWithMetadata = AIMessage & {
   id: string
@@ -41,7 +42,7 @@ export const addMessages = async (messages: AIMessage[]) => {
 
   if (db.data.messages.length >= 10){
     const oldestMessages = db.data.messages.slice(0, 5).map(removeMetadata)
-    const summary = ''
+    const summary = await summarizeMessages(oldestMessages)
     db.data.summary = summary
   }
   await db.write()
